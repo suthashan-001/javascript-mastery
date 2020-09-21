@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to own css file and bootstrap for buttons-->
+    <link rel="stylesheet" href="/blackjack/static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Blackjack</title>
+</head>
+<body>
+    <div class="header">
+        <div><img src="https://f0.pngfuel.com/png/490/257/playing-card-suit-heart-heart-line-png-clip-art.png" alt=""></div>
+        <div><h1><span id="game-result">BlackJack</span></h1></div>
+        <div> <img src="https://www.pngitem.com/pimgs/m/8-88502_transparent-playing-card-suits-png-spades-clip-art.png" alt=""></div>
+    </div>
+    <br>
+    <!-- game display -->
+    <div class="game">
+        <div class="display-row">
+            <!-- span tags allow it to change the text later on -->
+            <div id="user-column"><h3>User: <span id="user-result">0</span></h3></div>
+            <div id="bot-column"><h3>Dealer: <span id="bot-result">0</span></h3></div>
+            <!-- the difference between id and class is that class can apply to many tags while id can only apply to a specific thing on a page -->
+        </div>
+        <div class="option-row">
+            <div class="controls">
+                <button class="btn-lg btn-success mr-2" id="hit-button">Hit</button>
+                <button class="btn-lg btn-warning mr-2" id="stand-button">Stand</button>
+                <button class="btn-lg btn-danger" id="deal-button">Deal</button>
+            </div>
+        </div>
+        <!-- holds win/loss/draw records -->
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Win</th>
+                    <th>Loss</th>
+                    <th>Draw</th>
+                </tr>
+                <tr>
+                    <th><span id="win">0</span></th>
+                    <th><span id="loss">0</span></th>
+                    <th><span id="draw">0</span></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <script src="/blackjack/static/app.js"></script>
+</body>
+</html>
