@@ -46,7 +46,8 @@ function drawCard(player){
 
     //display image
     let picture = document.createElement("img");    
-    picture.src = 'static/images/' + card + '.png';
+    //instead of string concatenation use string templating (instead of ' use backtick ` to indicate its a template), it's alot nicer
+    picture.src = `static/images/${card}.png`; 
     picture.height = 114;
     picture.width = 91;
     //get the div where you want to append element (where using queryselector instead of getelementbyid)
@@ -66,14 +67,17 @@ function drawCard(player){
         if(player['ace'] > 0){
             player['betterhand'] = checkDeck(player);
             if(player['betterhand'] == false){
-                document.querySelector(player['score_location']).textContent="BUST";
+                document.querySelector(player['score_location']).textContent="BUST!";
+                document.querySelector(player['score_location']).style.color="red";
                 player['bust'] = true;
             }else{
                 document.querySelector(player['score_location']).textContent=player['score'];
 
             }
         }else{
-            document.querySelector(player['score_location']).textContent="BUST";
+            document.querySelector(player['score_location']).textContent="BUST!";
+            //styling the text
+            document.querySelector(player['score_location']).style.color="red";
             player['bust'] = true;
         }
     }
@@ -114,20 +118,45 @@ function checkmove(score){
     }
 }
 
+//sleeper function which give's delay affect
+function sleep(millisecond){
+    /*
+        The Promise is an object that represents either completion or failure of a user task. 
+        A promise in JavaScript can be in three states pending, fulfilled or rejected.
+
+    */
+    return new Promise(resolve => setTimeout(resolve,millisecond));
+}
+
 //bot logic
-function stand(){
+/*  
+    JavaScript is a single-threaded programming language which means only one thing can happen at a time.
+    Using asynchronous JavaScript (such as callbacks, promises, and async/await),
+    you can perform long network requests without blocking the main thread. 
+*/
+//async bascially stop's the whole browser from freezing during the sleeper function, only the function stand() if frozen for a few seconds
+async function stand(){ 
+    //if the game is over you can't click stand again
+    if(gameOver == true){
+        return
+    }
     let shouldDraw = true;
     //the user should have atleast hit once, bot can't go first, part of rules
     if(USER['score'] == 0){
         return;
     }
+
+    //await sleep(800);  //adds 1 second delay
     
     //will continue to draw until the bot decides that drawing will be a bad move
     while(shouldDraw == true && BOT['betterhand'] == false){
         //check to see if it is a smart move to draw card
         shouldDraw = checkmove(BOT['score']);
         if(shouldDraw == true && BOT['betterhand'] == false){
+            //to add delay when adding card's were gonna add a sleep function :O {its getting intereting}
             drawCard(BOT);
+            //i like game better without delay 
+            //await sleep(1000);  //adds 1 second delay
         }else{
             shouldDraw = false;
         }
@@ -155,26 +184,33 @@ function gameResult(){
     //boolean conditions to see who won the game
     if((USER['bust'] && BOT['bust']) == true || USER['score'] == BOT['score']){
         //draw
-        document.querySelector("#game-result").textContent="Draw";
-        //update table
         drawCount+=1;
+        document.querySelector("#game-result").textContent="Draw";
+        document.querySelector("#game-result").style.color="goldenrod"
+        //update table
         document.querySelector("#draw").textContent=drawCount;
 
     }else if((BOT['bust'] == true && USER['bust'] == false)||(USER['score'] > BOT['score'] && USER['bust'] == false)){
         //win
         winCount+=1;
         document.querySelector("#game-result").textContent="Win";
+        document.querySelector("#game-result").style.color="green";
         document.querySelector("#win").textContent=winCount;
     }else{
         //loss
         loseCount+=1;
         document.querySelector("#game-result").textContent="Loss";
+        document.querySelector("#game-result").style.color="red";
         document.querySelector("#loss").textContent=loseCount;
     }
 }
 
 //reset's game board so we dont have to refresh page 
 function deal(){
+    //con only deal after bot has played 
+    if(BOT['score'] == 0){
+        return;
+    }
     //reset game state
     gameOver = false;
     USER['score'] = 0;
@@ -185,25 +221,38 @@ function deal(){
     BOT['ace'] = 0;
     USER['betterhand'] = false;
     BOT['betterhand'] = false;
+    document.querySelector(USER['score_location']).style.color="white";
+    document.querySelector(BOT['score_location']).style.color="white";
 
+    // //clear card's div's
+    // var userCards = document.querySelector(USER['div']).getElementsByTagName("img");
+    // while(userCards.length > 0){
+    //     for(let i = 0; i < userCards.length; i++){
+    //         userCards[i].parentNode.removeChild(userCards[i]);
+    //     }
+    // }
 
+    // var botCards = document.querySelector(BOT['div']).getElementsByTagName("img");
+    // while(botCards.length > 0){
+    //     for(let i = 0; i < botCards.length; i++){
+    //         botCards[i].parentNode.removeChild(botCards[i]);
+    //     }
+    // }
+
+    /* way better version of removing images in div and a lot cleaner too - credit to cleverprogrammer on youtube */
     //clear card's div's
-    var userCards = document.querySelector(USER['div']).getElementsByTagName("img");
-    while(userCards.length > 0){
-        for(let i = 0; i < userCards.length; i++){
-            userCards[i].parentNode.removeChild(userCards[i]);
-        }
+    let userImages = document.querySelector(USER['div']).querySelectorAll("img");
+    for(let i = 0; i < userImages.length; i++){
+        userImages[i].remove();
     }
-
-    var botCards = document.querySelector(BOT['div']).getElementsByTagName("img");
-    while(botCards.length > 0){
-        for(let i = 0; i < botCards.length; i++){
-            botCards[i].parentNode.removeChild(botCards[i]);
-        }
+    let botImages = document.querySelector(BOT['div']).querySelectorAll("img");
+    for(let i = 0; i < botImages.length; i++){
+        botImages[i].remove();
     }
 
     //reset score board
     document.querySelector("#game-result").textContent="BlackJack";  
+    document.querySelector("#game-result").style.color="black";
     document.querySelector(USER['score_location']).textContent=USER["score"];
     document.querySelector(BOT['score_location']).textContent=BOT["score"];   
 }
