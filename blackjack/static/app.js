@@ -9,7 +9,6 @@ let info = {
     //since we made these keys up they have to be string values, if not it will try to look for key among code
     'user': {'div':'#user-column', 'score_location':'#user-result', 'score':0, 'bust':false, 'ace':0,'betterhand':false},
     'bot': {'div':'#bot-column', 'score_location':'#bot-result', 'score':0, 'bust':false, 'ace:':0,'betterhand':false}
-    //fix bot's betterhand mechanism
 }
 
 /*
