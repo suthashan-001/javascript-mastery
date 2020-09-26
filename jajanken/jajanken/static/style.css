@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500;700&display=swap');
+/* remove's default css in webpages */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* for tag's like header you dont need . infront only for class names */
+header{
+    padding: 20px;
+    background-color: white;
+}
+
+header > h1 {
+    text-align: center;
+    font-family: 'Asap', sans-serif;
+}
+
+body{
+    background-color: #24272E;
+}
+
+.scoreboard{
+    /* margin gives space between scoreboard and header (top and bottom) and auto bascially center's it */
+    margin: 20px auto;
+    border: solid 3px white;
+    border-radius: 4px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    font-size: 45px;
+    padding: 10px 15px;
+    font-family: 'Asap', sans-serif;
+    /* relative makes .scoreboard the parent coordinate system */
+    position: relative; 
+}
+
+.badge{
+    background-color: #E2584D;
+    font-size: 15px;
+    width: 45px;
+    text-align: center;
+    font-family: 'Asap', sans-serif;
+}
+
+/* id's are # and classes are . while tag's are just the tag name */
+#user-badge{
+    /* position will look at parent div's to find something relative to base the coordinate system of, if it can't find a relative, 
+       it uses the whole screen as a coordinate system */
+    position: absolute;
+    left: -25px;
+    /* the values are 38% "from" the top */
+    top: 38%;
+}
+
+#bot-badge{
+    /* absolute will bascially make it ignore all other div's it will just be floating on the screen to be positioned */
+    position: absolute;
+    right: -25px;
+    top: 38%;
+}
+
+.output-message  {
+    padding: 10px;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Asap', sans-serif;
+}
+
+.options{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+.choice{
+    padding: 10px 50px;
+}
+
+/* add's transistion that make image bigger on hover*/
+.choice img{
+    transition: all .2s ease-in-out;
+}
+
+.choice img:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.refresh{
+    padding: 10px 50px;
+    transition: all .2s ease-in-out;
+}
+
+.refresh img:hover{
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.header-win{
+    background-color: lime;
+}
+
+.header-lose{
+    background-color: #E2584D;
+}
+
+.header-draw{
+    background-color: goldenrod;
+}
+
+
+
+

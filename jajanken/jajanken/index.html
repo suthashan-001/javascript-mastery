@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Jajanken</title>
+</head>
+<body>
+    <!-- put header's in header tag's be simantic -->
+    <header id="title"><h1>Jajanken</h1></header>
+    <div class="scoreboard">
+        <!-- classes allow multiple div's to have same characteristic's while id's allow one div to have distinct characteristic (such as posistion) -->
+        <div class="badge" id="user-badge">User</div>
+        <div class="badge" id="bot-badge">Bot</div>
+        <!-- span's are inline elements while div's are block elements, we want score on the same line as the div badges 
+        these span's will display 0:0 right beside each other -->
+        <span class="user-score" id="USER-score">0</span>:<span class="bot-score" id="BOT-score">0</span>
+    </div>
+    <div class="output-message">
+        <p>"Make your move!"</p>
+    </div>
+    <div class="options">
+        <!-- use class to characterize each div to be the same and uses id to deferentiate options -->
+        <div class="choice" id="rock"> 
+            <img src="https://img.icons8.com/office/80/000000/hand-rock.png"/> 
+        </div>
+        <div class="choice" id="paper"> 
+            <img src="https://img.icons8.com/officel/80/000000/hand.png"/> 
+        </div>
+        <div class="choice" id="scissor"> 
+            <img src="https://img.icons8.com/color/96/000000/hand-scissors.png"/>
+        </div>
+    </div>
+    <script src="/static/suthy_original.js"></script>
+</body>
+</html>
