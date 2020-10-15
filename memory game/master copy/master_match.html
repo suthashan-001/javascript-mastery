@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/master_style.css">
+    <title>Document</title>
+    <!-- load's javascript async while html is being rendered to prevent page stall's -->
+    <script src="master_js.js" async></script>
+</head>
+<body>
+    <h1 class="title">Halloween Match!</h1>
+    <img id="casper" class="decorations" src="https://vignette.wikia.nocookie.net/paramountcartoons/images/4/4b/Casper_300-1-.gif/revision/latest/scale-to-width-down/340?cb=20110307153512" alt="">
+    <img  id="cat"  class="decorations" src="https://images.vexels.com/media/users/3/180537/isolated/preview/be12e2a4805eec84e22445829b2271f8-black-cat-playful-cartoon-by-vexels.png" alt="">
+    <img  id="batman"  class="decorations" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0ddc9707-741b-4a0d-be09-f114205edcfe/dajpox1-2cfc1ad8-5176-4bf8-9411-cd4f5540514a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMGRkYzk3MDctNzQxYi00YTBkLWJlMDktZjExNDIwNWVkY2ZlXC9kYWpwb3gxLTJjZmMxYWQ4LTUxNzYtNGJmOC05NDExLWNkNGY1NTQwNTE0YS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.uLB_-GFW806q-3AvkMfGVxgeapZa6Yp3gEFNaj6TXE8" alt="">
+    <div class="overlay-text visible">
+        Click to Start
+    </div>
+    <div id="game-over-text" class="overlay-text">
+        GAME OVER
+        <span class="overlay-text-small">Click to Restart</span>
+    </div>
+    <div id="victory-text" class="overlay-text">
+        VICTORY
+        <span class="overlay-text-small">Click to Restart</span>
+    </div>
+    <div class="game-container">
+        <div class="game-info-container">
+            <div class="time-div">Time: <span id="time-remaining">100</span></div>
+            <div class="flip-div">Flips: <span id="flips">0</span></div>
+        </div>
+        <!-- cards: visible class determine's which side of the card is visible -->
+        <div class="card">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Dracula.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card">
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Dracula.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Bat.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Bat.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Bones.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Bones.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Cauldron.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Cauldron.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Eye.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Eye.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Ghost.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Ghost.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Pumpkin.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Pumpkin.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Skull.png" alt="" class="card-value">
+            </div>
+        </div>
+        <div class="card  ">  
+            <!-- back-card refere's to the back of the card while card-design refer's to similarites between back and front of card -->
+            <div class="card-face back-card">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/Cobweb.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets//Images/Spider.png" alt="" class="spider">
+            </div>
+            <!-- this div "front-card" is overlapping the "back-card" div which mean's the hover for back-card is covered-->
+            <div class="card-face front-card">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-1">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-2">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-3">
+                <img src="/Assets/Images/CobwebGrey.png" alt="" class="cobweb" id="cobweb-4">
+                <img src="/Assets/Images/Skull.png" alt="" class="card-value">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

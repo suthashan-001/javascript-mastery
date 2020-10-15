@@ -1,0 +1,244 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* import custom font's */
+@font-face{
+    font-family: "Creepy";
+    src: url(/Assets/Fonts/Creepy.woff), url(/Assets/Fonts/Creepy.woff2)
+}
+@font-face{
+    font-family: "Lunacy";
+    src: url(/Assets/Fonts/Lunacy.woff), url(/Assets/Fonts/Lunacy.woff2)
+}
+
+body{
+    background: radial-gradient(#9D5900, #3D2200);
+}
+
+/* decoration */
+#casper{
+    position: absolute;
+    right:80px;
+    top:35vh;
+    width: 200px;
+    height: auto;
+}
+
+#cat{
+    position: absolute;
+    top: 380px;
+    width: 280px;
+    height: auto;
+}
+
+#batman{
+    position: absolute;
+    width: 200px;
+    height: auto;
+    right: 70px;
+    top:130vh;
+}
+
+/* layout */
+h1{
+    text-align: center;
+    font-family: "Creepy";
+    margin: 10px;
+    color: darkorange;
+    letter-spacing: 1px;
+    font-size: 6em;
+}
+
+.game-info-container{
+    display: flex;
+    justify-content: space-between;
+    font-family: "Lunacy";
+    color: #FFBB89;
+    font-size: 3em;
+    grid-column: 1/-1;
+}
+
+.game-container{
+    display: grid;
+    margin: 20px;
+    grid-template-columns: repeat(4,auto);
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.card{
+    width: 125px;
+    height: 175px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* share's styles between front and back of the card */
+.card-face{
+    /* child of card so 100% width and height will be (125px by 175px) */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    border-width: 1px;
+    border-style: solid;
+    /* disable's the face of an element that is in the direction that is away from the user (front of card is away from user) */
+    backface-visibility: hidden;
+}
+
+/* design front of card, we want this facing away from the user */
+.front-card{
+    /* will flip div on y axis - leaving it to face away from user */
+    transform: rotateY(180deg);
+    background-color: #FFBB89;
+    border-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-value{
+    transform: scale(0.9);
+}
+
+/* when you hover over the front of the card, select the cobweb and do this! */
+.front-card:hover .cobweb{
+    width: 52px;
+    height: auto;
+}
+/* when you hover over the front of the card, select the card-value and do this! */
+.front-card:hover .card-value {
+    /* scale is a animation therefore transform */
+    transform: scale(1);
+}
+
+/* Challenge: On successfull match, get the card-value to do an animation */
+.card.victory .card-face .card-value{
+    animation-name: victory;
+    animation-duration: 200ms;
+}
+
+@keyframes victory{
+    0%{rotate: 0deg;}
+    20%{rotate: 30deg;}
+    40%{rotate: -30deg;}
+    60%{rotate: 30deg;}
+    80%{rotate: -30deg;}
+    100%{rotate: 0deg;}
+}
+
+.back-card{
+    background-color: black;
+    border-color: #FF6D00;;
+}
+
+/* when you hover on back-card, select the spider element */
+.back-card:hover .spider{
+    transform: translateY(0);
+}
+
+.back-card:hover .cobweb{
+    width: 52px;
+    height: auto;
+}
+
+/* generic cobweb's have these characteristic's */
+.cobweb{
+    width: 44px;
+    height: auto;
+    position: absolute;
+    transition: width 100ms ease-in-out, height 100ms ease-in-out;
+}
+
+.spider{
+    position: absolute;
+    /* use pixel's when you want to make specific adjustment's; what does right:1 mean? css needs units to move element's by specfic amount */
+    transform: translateY(-10px);
+    right: 20px;
+    width: 90px;
+    height: auto;
+}
+
+#cobweb-1{
+    top:0;
+    left:0;
+    transform: rotate(270deg);
+}
+
+#cobweb-2{
+    top:0;
+    right:0;
+}
+
+#cobweb-3{
+    bottom:0;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+#cobweb-4{
+    right: 0;
+    bottom: 0;
+    transform: rotate(90deg);
+}
+
+/* visible class rotates the front face and backface of the card to switch perspective from user, we can toggle this class to switch between the card faces */
+.visible .front-card{
+    transform: rotate(0);
+}
+
+.visible .back-card{
+    transform: rotate(-180deg);
+}
+
+/* overlay */
+.overlay-text {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #FF6D00;
+    font-family: Creepy, serif;
+    transition: background-color 500ms, font-size 500ms;
+    cursor: pointer;
+}
+  
+.overlay-text-small {
+    font-size: .3em;
+}
+  
+.overlay-text.visible {
+    display: flex;
+    animation: overlay-grow 500ms forwards;
+}
+
+@keyframes overlay-grow {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    to {
+      background-color: rgba(0, 0, 0, .8);
+      font-size: 10em;
+    }
+}
+  
+  
+
+
+/* position each specific cobweb */
+
+@media screen and (max-width:1100px){
+    .decorations{
+        display: none;
+    }
+}

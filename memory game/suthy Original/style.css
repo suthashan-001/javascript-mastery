@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basically, a margin is the space around an element and padding refers to the space between an element and the content inside it. */
+
+header{
+    text-align: center;
+    text-decoration: underline;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    background-color: white;
+    font-size: 12px;
+    width: 20%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.display{
+    width: 80%;
+    height: 400px;
+    padding: 10px;
+    margin: 0 auto;
+    background-image: url(https://cdn.trendhunterstatic.com/thumbs/cool-backgrounds.jpeg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 20px 20px;
+}
+
+body{
+    background-color:	#343d46;
+}
+
+.button-div{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    display: flex;
+    justify-content: center;
+    background-color: lime;
+    border: #343d46;
+    margin: 15px;
+    padding: 3px 5px;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.row{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 5px;
+    height: 170px;
+}
+
+#row-1{
+    margin-top: 1px;
+}
+
+.card{
+    width: 150px;
+    position: relative;
+}
+
+.cover{
+    height: 170px;
+    width: 150px;
+    z-index: 1;
+    position: absolute;
+}
+
+.toggle_opacity{
+    opacity: 0;
+}
+
+
+/* display on smaller window's */
+@media screen and (max-width:900px){
+    .display{
+        width: 95%;
+    }
+
+    header{
+        font-size: 10px;
+    }
+
+    body{
+        overflow-y: hidden;
+    }
+
+    button{
+        margin-top: 0%;
+        font-size: 15px;
+    }
+}
