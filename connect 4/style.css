@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+header{
+    font-size: 4em;
+    font-family: 'Indie Flower', cursive;
+    font-size: bold;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+body{
+    /* gives contrast */
+    background-color: whitesmoke;
+}
+
+#red-colour{
+    color: red;
+    padding-right: 12px;
+}
+
+#yellow-colour{
+    color: goldenrod;
+}
+
+.game-container{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.game-board{
+    background-color: blue;
+    width: 80%;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(7,auto);
+    justify-content: space-evenly;
+}
+
+.column{
+    background-color: rgb(66, 66, 253);
+    width: 20vh;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(6,auto);
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.ghost-chip{
+    display: none;
+    position: absolute;
+    width: 66px;
+    height: 60px;
+    border-radius: 100%;
+    top: -67px;
+    left:23px;
+    z-index: 100;
+}
+
+.red{
+    background-color:rgba(255, 6, 6, 0.35);
+}
+
+.yellow{
+    background-color:rgba(255,255,0,0.35);
+}
+
+/* only if ghost-chip has visible class will it appear on hover */
+.column:hover .ghost-chip.red.visible{
+    display: block;
+}
+
+.column:hover .ghost-chip.yellow.visible{
+    display: block;
+}
+
+.row{
+    background-color:whitesmoke;
+    width: 66px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.row.red{
+    background-color: red;
+}
+
+.row.yellow{
+    background-color: rgb(241, 194, 75);
+}
+
+/* Dropping chip animation */
+.dropper{
+    display: none;
+    position: absolute;
+    width: 66px;
+    height: 60px;
+    border-radius: 100%;
+    top: -68px;
+    left:24px;
+    z-index: 10;
+}
+
+.dropper.red{
+    display: block;
+    background-color: red;
+}
+
+.dropper.yellow{
+    display: block;
+    background-color:goldenrod;
+}
+
+/* drop's chip at correct row */
+.dropper.red.row-0,.dropper.yellow.row-0{
+    /* row order in 2D array and html is switched around */
+    animation: drop-0 600ms;
+}
+.dropper.red.row-1,.dropper.yellow.row-1{
+    animation: drop-1 580ms;
+}
+.dropper.red.row-2,.dropper.yellow.row-2{
+    animation: drop-2 520ms;
+}
+.dropper.red.row-3,.dropper.yellow.row-3{
+    animation: drop-3 460ms;
+}
+.dropper.red.row-4,.dropper.yellow.row-4{
+    animation: drop-4 420ms;
+}
+.dropper.red.row-5,.dropper.yellow.row-5{
+    animation: drop-5 380ms;
+}
+
+@keyframes drop-5{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(71.7px);
+    }
+}
+
+@keyframes drop-4{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(139px);
+    }
+}
+
+@keyframes drop-3{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(205.8px);
+    }
+}
+
+@keyframes drop-2{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(274px);
+    }
+}
+
+@keyframes drop-1{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(340.4px);
+    }
+}
+
+@keyframes drop-0{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(409px);
+    }
+}
+
+/*  
+intro overlay:Im proud of the way it turned out, was not planned but buttons move down as text grows in center giving cool animation effect
+*/ 
+
+.overlay{
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    /* brings to center of screen */
+    top:0;
+    bottom: 0;
+    right:0;
+    left:0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    animation: appear 1200ms forwards;
+}
+
+.intro-overlay{
+    display: flex;
+}
+
+.outro-overlay{
+    display: none;
+}
+
+
+.outro-overlay.red{
+    color: red;
+}
+
+.outro-overlay.yellow{
+    color: goldenrod;
+}
+
+.intro-overlay.hide{
+    display: none;
+}
+
+.outro-overlay.appear{
+    display: flex;
+} 
+
+
+.title{
+    font-size: 11em;
+    font-family: 'Indie Flower', cursive;
+    font-size: bold;
+}
+
+button {
+    /* https://1stwebdesigner.com/free-code-snippets-css-buttons/ */
+    width: 130px;
+    height: 40px;
+    background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    border-bottom: 4px solid #2b8bc6;
+    color: #fbfbfb;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+    font-size: 15px;
+    text-align: center;
+    text-indent: 5px;
+    box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+    cursor: pointer;
+    margin: 10px;
+}
+
+.credits{
+    /* Gazer Suthy in the building */
+    position: absolute;
+    color: whitesmoke;
+    font-size: 1.5em;
+    bottom: 0;
+    right: 0.5cm;
+    font-family: 'Satisfy', cursive;
+}
+
+.credits.black{
+    color: black;
+}
+
+@keyframes appear{
+    from{
+        font-size: 0;
+        background-color: rgba(0,0,0,0);
+    }
+
+    to{
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
