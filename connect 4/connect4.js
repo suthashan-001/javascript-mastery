@@ -11,7 +11,8 @@ class Connect4{
         this.currentAnimationDelay = 600;
         this.busyAnimating = false;
         this.turnCount = 0;       
-        
+        this.previousPlayerWon = null;
+        this.winOverlay = document.querySelector('.outro-overlay');
     }
 
     startGame_Original(){
@@ -28,10 +29,18 @@ class Connect4{
             [0,0,0,0,0,0],
         ]
         this.resetBoard();
-        //stores the connect 4 coordinates
         this.connect4Cords = [];
-        //decides who goes first and adds the player's drop chip
-        this.randomPlayer();
+
+        
+        //if this is a replayed game state, remove win animation effects of previous round
+        if(this.previousPlayerWon != null){
+            this.winningChip = document.querySelectorAll('.highlight');
+            this.winningChip.forEach((highlightedChip)=>{
+                highlightedChip.classList.remove(`winning-match-${this.previousPlayerWon}`,'highlight');
+            })
+            this.winOverlay.classList.remove(`${this.previousPlayerWon}`);
+        }
+        this.randomPlayer();    //decides who goes first and adds the player's drop chip
     }
 
     //functionality when player click's a column
@@ -40,47 +49,45 @@ class Connect4{
         this.validColumn = this.checkColumn(column);
 
         if(this.validColumn == true && this.busyAnimating == false){
-            //locates the row's index number where the chip will go
+            //finds the row index of the first avaliable hole of the clicked column
             this.row = this.findSpot(column); 
             //update board
             if(this.playerTurn['red'] == true){
-                this.updateBoard('red',column,this.row);
+                this.updateBoard('red',column,this.row,1);
             }else{
-                this.updateBoard('yellow',column,this.row);
+                this.updateBoard('yellow',column,this.row,2);
             }
         }
     }
 
     //updates the game board based on the player's move
-    updateBoard(player,column,row){
-        //store move in matrix
-        if(player == 'red'){
-            this.board[this.id[column.id]][row] = 1;
-        }else{
-            this.board[this.id[column.id]][row] = 2;
-        }
+    updateBoard(player,column,row,token){
+        this.board[this.id[column.id]][row] = token;
 
         //add chip drop animation for player's move
-        this.dropperDiv = column.querySelector('.dropper');
-        this.dropperDiv.classList.add(player,`row-${row}`);
+        this.chipDrop = column.querySelector('.dropper');
+        this.chipDrop.classList.add(player,`row-${row}`);
         this.currentAnimationDelay = this.dropDelay[row];
         this.busyAnimating = true;
 
         //animationDelay keep's track of the delay and a callback is used to execute the code ("place chip") after the delay
         this.animationDelay(()=>{   
-            /*  Without callback the drop animation occur's but chip's doesn't get updated in the appropriate posistion
-                With a callback the chip's get updated
+            /*  
+                Without callback the drop animation occur's but chip's doesn't get updated in the appropriate posistion. This is because 
+                while the browser is keeping track of the delay, the callstack has already finished compiling the code. With a callback 
+                the chip's get updated because the callback function get's pushed onto the callstack when the browser is finished
+                executing the code ("this case keeping track of the delay")
             */
-            this.dropperDiv.classList.remove(player,`row-${row}`);
+            this.chipDrop.classList.remove(player,`row-${row}`);
             this.rowsArray = column.getElementsByClassName('row');
-            //the row element's grabbed from the dom are in reverse order compared to our convention with the board so adjust the order
+            //adjust row order to convention of our board
             this.adjustedOrder = [5,4,3,2,1,0];
-            //change's colour of the hole based on the player (from white to red)
+            //changes colour of the hole based on the player 
             this.rowsArray[this.adjustedOrder[row]].classList.add(player);
 
             //check if player won after making move 
             if(this.turnCount >= 6){
-                this.checkWin(player);
+                this.checkWin(player,token);
             }
 
             //if current player did not win, switch player turn's
@@ -88,56 +95,26 @@ class Connect4{
                 this.switchTurn(player);
                 this.turnCount++;
             }else{
-                this.showConnect4(()=>{
-                    // this.resetBoard();
-                    //connect 4 coord's are empty
-                    this.connect4Cords.forEach((coordinates)=>{
-                        coordinates.classList.add(player);
-                    })
-                })
-                this.resultPage(()=>{
-                    //win message
-                    this.winOverlay = document.querySelector('.outro-overlay');
-                    this.winner = document.querySelector('.player');
-                    this.winner.innerHTML = player;
-                    this.winner.style.color = `'${player}'`;
-                    this.winOverlay.classList.add('appear',player);
-                })
+                //win message
+                this.winner = document.querySelector('.player');
+                this.winner.innerHTML = player;
+                this.winOverlay.classList.add('appear',player);
             }
             this.busyAnimating = false;
         });
-
-        
     }
 
-    //game will pause and show the connect 4
-    showConnect4(callback){
-        setTimeout(()=>{
-            callback();
-        },1000)
-    }
-
-    //after showing the connect 4 the game will exit to outro screen
-    resultPage(callback){
-        setTimeout(()=>{
-            callback();
-        },3000)
-    }
-
+    //async javascript baby
     animationDelay(callback){
-        //understand how this works
         setTimeout(()=>{
             callback();
         },this.currentAnimationDelay)
     }
 
-    checkWin(player){
-        this.playerToken = 0;
-        if(player == 'red'){
-            this.playerToken = 1;
-        }else{
-            this.playerToken = 2;
-        }
+    //check's all the possible win combination's (don't even try figure out this logic without a paper and pen, lol)
+    checkWin(player,token){
+        this.playerToken = token;
+       
         //check for horizontal win (horizontal based on board array)
         for(let i = 0; i < this.colMax; i++){
             this.consecutiveCounter = 0;
@@ -153,13 +130,20 @@ class Connect4{
                 //if consecutive counter = 4 then there is a connect 4
                 if(this.consecutiveCounter == 4){
                     this.playerWon[player] = true;
+                    this.previousPlayerWon = player;
+                    // add winning match class to the chip's that make the connect 4 for a special win animation
+                    this.connect4Cords.forEach((coordinates)=>{
+                        this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                        this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                        this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                    })
                 }
             }
         }
         //check for vertical win
         for(let i = 0; i < this.colMax; i++){
             this.consecutiveCounter = 0;
-            for(let j = 0; j < this.rowMax; j++){
+            for(let j = 0; j < this.colMax; j++){
                 if(this.board[j][i] == this.playerToken){
                     this.connect4Cords.push([j,i])
                     this.consecutiveCounter++;
@@ -171,6 +155,13 @@ class Connect4{
                 //if consecutive counter = 4 then there is a connect 4
                 if(this.consecutiveCounter == 4){
                     this.playerWon[player] = true;
+                    this.previousPlayerWon = player;
+                    // add winning match class to the chip's that make the connect 4 for a special win animation
+                    this.connect4Cords.forEach((coordinates)=>{
+                        this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                        this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                        this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                    })
                 }
             }
         }
@@ -190,6 +181,13 @@ class Connect4{
                 //if consecutive counter = 4 then there is a connect 4
                 if(this.consecutiveCounter == 4){
                     this.playerWon[player] = true;
+                    this.previousPlayerWon = player;
+                    // add winning match class to the chip's that make the connect 4 for a special win animation
+                    this.connect4Cords.forEach((coordinates)=>{
+                        this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                        this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                        this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                    })
                 }
             }
         }
@@ -211,6 +209,13 @@ class Connect4{
                     //if consecutive counter = 4 then there is a connect 4
                     if(this.consecutiveCounter == 4){
                         this.playerWon[player] = true;
+                        this.previousPlayerWon = player;
+                        // add winning match class to the chip's that make the connect 4 for a special win animation
+                        this.connect4Cords.forEach((coordinates)=>{
+                            this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                            this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                            this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                        })
                     }
                 }
             }
@@ -230,6 +235,13 @@ class Connect4{
                 //if consecutive counter = 4 then there is a connect 4
                 if(this.consecutiveCounter == 4){
                     this.playerWon[player] = true;
+                    this.previousPlayerWon = player;
+                    // add winning match class to the chip's that make the connect 4 for a special win animation
+                    this.connect4Cords.forEach((coordinates)=>{
+                        this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                        this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                        this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                    })
                 }
             }
         }
@@ -250,6 +262,13 @@ class Connect4{
                     //if consecutive counter = 4 then there is a connect 4
                     if(this.consecutiveCounter == 4){
                         this.playerWon[player] = true;
+                        this.previousPlayerWon = player;
+                        // add winning match class to the chip's that make the connect 4 for a special win animation
+                        this.connect4Cords.forEach((coordinates)=>{
+                            this.getRows = this.columns[coordinates[0]].getElementsByClassName('row');
+                            this.findChip = this.getRows[this.adjustedOrder[coordinates[1]]];
+                            this.findChip.classList.add(`winning-match-${player}`,'highlight');
+                        })
                     }
                     //every i increment we want to decrement j (that's the pattern)
                     this.j--;
@@ -348,9 +367,9 @@ function connect4(){
         introOverlay.classList.add('hide');
         game.startGame_Original();
     })
-
+    
     //outro overlay options
-    document.querySelector('.reset-Original').addEventListener('click',()=>{
+    document.querySelector('.play-again').addEventListener('click',()=>{
         outroOverlay.classList.remove('appear');
         game.startGame_Original();
     })
@@ -376,17 +395,14 @@ connect4();
         Therefore split up the eventlister in the "main" with code linking between them. Also, don't put your entire game in a class, 
         only the [functionality of the game mechanics] should be in the class. Let the main handle the **linking** of functionality 
         between game mechanics.
-
         code:
         document.querySelector('.Original').addEventListener('click',()=>{
             introOverlay.classList.add('hide');
             game.startGame_Original(); <- in function there is another event listener
         })
-
         startGame_Original(){
             this.columns.forEach(column => {
             column.addEventListener('click',this.clickedColumn);
         }); 
         }
 */
-
