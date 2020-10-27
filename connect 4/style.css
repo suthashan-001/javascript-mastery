@@ -1,3 +1,9 @@
+/* 
+    Important lesson: Leave the animation's to css and leave the functionality of objects to javascript.
+    I was trying to animate the win menu with javascript (removing and adding colours classes in setTimout's) which was a noob move!  
+    There are level's to this shit baby! Had to make that mistake in-order to learn from it :D
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
@@ -201,7 +207,18 @@ body{
 intro overlay:Im proud of the way it turned out, was not planned but buttons move down as text grows in center giving cool animation effect
 */ 
 
-.overlay{
+.row.winning-match-red{
+    /* blinking red animation on connect 4 */
+    animation: blinking-red 900ms 1000ms 3 ease-in forwards;
+}
+
+.row.winning-match-yellow{
+    /* blinking red animation on connect 4 */
+    animation: blinking-yellow 900ms 1000ms 3 ease-in forwards;
+}
+
+.intro-overlay{
+    display: flex;
     position: fixed;
     justify-content: center;
     align-items: center;
@@ -216,21 +233,20 @@ intro overlay:Im proud of the way it turned out, was not planned but buttons mov
     animation: appear 1200ms forwards;
 }
 
-.intro-overlay{
-    display: flex;
-}
-
 .outro-overlay{
     display: none;
-}
-
-
-.outro-overlay.red{
-    color: red;
-}
-
-.outro-overlay.yellow{
-    color: goldenrod;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    /* brings to center of screen */
+    top:0;
+    bottom: 0;
+    right:0;
+    left:0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    animation: winmesage-appear 5000ms ease-in forwards;
 }
 
 .intro-overlay.hide{
@@ -241,11 +257,68 @@ intro overlay:Im proud of the way it turned out, was not planned but buttons mov
     display: flex;
 } 
 
+.outro-overlay.red{
+    color: red;
+}
 
-.title{
+.outro-overlay.yellow{
+    color: goldenrod;
+}
+
+@keyframes appear{
+    from{
+        font-size: 0;
+        background-color: rgba(0,0,0,0);
+    }
+
+    to{
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+
+@keyframes winmesage-appear{
+    0%{
+        font-size: 0;
+        background-color: rgba(0,0,0,0);
+    }
+    75%{
+        font-size: 0;
+        background-color: rgba(0,0,0,0);
+    }100%{
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+@keyframes blinking-red{
+    from{
+        background-color: whitesmoke;
+    }
+    to{
+        background-color: red;
+    }
+}
+
+@keyframes blinking-yellow{
+    from{
+        background-color: whitesmoke;
+    }
+    to{
+        background-color: goldenrod;
+    }
+}
+
+.title,.message{
     font-size: 11em;
     font-family: 'Indie Flower', cursive;
     font-size: bold;
+}
+
+.play-again{
+    font-size: 3em;
+    font-family: 'Indie Flower', cursive;
+    font-size: bold;
+    margin: 40px 40px;
 }
 
 button {
@@ -279,18 +352,4 @@ button {
     font-family: 'Satisfy', cursive;
 }
 
-.credits.black{
-    color: black;
-}
-
-@keyframes appear{
-    from{
-        font-size: 0;
-        background-color: rgba(0,0,0,0);
-    }
-
-    to{
-        background-color: rgba(0, 0, 0, 0.75);
-    }
-}
 

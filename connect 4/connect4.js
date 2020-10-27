@@ -31,7 +31,6 @@ class Connect4{
         this.resetBoard();
         this.connect4Cords = [];
 
-        
         //if this is a replayed game state, remove win animation effects of previous round
         if(this.previousPlayerWon != null){
             this.winningChip = document.querySelectorAll('.highlight');
@@ -70,7 +69,7 @@ class Connect4{
         this.currentAnimationDelay = this.dropDelay[row];
         this.busyAnimating = true;
 
-        //animationDelay keep's track of the delay and a callback is used to execute the code ("place chip") after the delay
+        //animationDelay keep's track of the delay and a callback is used to execute the code after the delay
         this.animationDelay(()=>{   
             /*  
                 Without callback the drop animation occur's but chip's doesn't get updated in the appropriate posistion. This is because 
@@ -286,9 +285,8 @@ class Connect4{
         }
     }
 
-    //check's to see if column passes is full
+    //check's to see if column is full
     checkColumn(column){
-        // 0 indicates empty spot on board
         if(this.board[this.id[column.id]][5] != 0){
             return false;
         }else{
