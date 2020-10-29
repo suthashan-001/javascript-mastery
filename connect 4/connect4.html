@@ -14,12 +14,24 @@
     <div class="intro-overlay">
         <div class="title"><span id="red-colour">Connect </span><span id="yellow-colour">4</span></div>
         <div class="credits">by: GazerSuthy</div>
-        <div class="game-options"><button class="Original">Original</button></div>
+        <div class="game-options"><button class="Original">Original</button><button class="pop">Pop</button></div>
     </div>
-
-    <div class="outro-overlay">
-        <div class="message"> <span class="player">Player</span> Won</div>
-        <div class="game-options"><span class="play-again">Play Again</span></div>
+    <!-- currently playing the original mode -->
+    <div class="outro-overlay outro-overlay-1">
+        <div class="message"> <span class="originalWinner">Player</span> Won</div>
+        <div class="game-options"><span class="playAgain-original">Play Again</span><span class="play-pop">Pop</span></div>
+        <div class="credits">by: GazerSuthy</div>
+    </div>
+    <!-- currently playing the pop mode -->
+    <div class="outro-overlay outro-overlay-2">
+        <div class="message"> <span class="popWinner">Player</span> Won</div>
+        <div class="game-options"><span class="playAgain-pop">Play Again</span><span class="play-original">Original</span></div>
+        <div class="credits">by: GazerSuthy</div>
+    </div>
+    <!-- draw screen -->
+    <div class="outro-overlay draw">
+        <div class="message">Draw!</div>
+        <div class="game-options"><span class="draw-playAgain">Play Again</span><span class="draw-original">Original</span></div>
         <div class="credits">by: GazerSuthy</div>
     </div>
 
@@ -102,6 +114,14 @@
                 <div class="ghost-chip yellow"></div>
                 <div class="dropper"></div>
             </div>
+        </div>
+        <div class="user-interface">
+            <div class="scoreboard">
+                <div class="red-score">Red <div id=red-score-num>0</div></div>
+                <div class="yellow-score">Yellow <div id=yellow-score-num>0</div></div>
+            </div>
+            <button class="pop-button">Pop</button>
+            <button class="cancel">Cancel</button>
         </div>
     </div>
     <script src="/connect4.js"></script>

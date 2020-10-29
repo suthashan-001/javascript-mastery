@@ -43,6 +43,7 @@ body{
 }
 
 .game-board{
+    margin-left: 80px;
     background-color: blue;
     width: 80%;
     height: 70vh;
@@ -265,6 +266,10 @@ intro overlay:Im proud of the way it turned out, was not planned but buttons mov
     color: goldenrod;
 }
 
+.outro-overlay.draw{
+    color: lime;
+}
+
 @keyframes appear{
     from{
         font-size: 0;
@@ -314,12 +319,14 @@ intro overlay:Im proud of the way it turned out, was not planned but buttons mov
     font-size: bold;
 }
 
-.play-again{
+.play-original,.playAgain-pop,.playAgain-original,.play-pop,.draw-playAgain,.draw-original{
     font-size: 3em;
     font-family: 'Indie Flower', cursive;
     font-size: bold;
     margin: 40px 40px;
 }
+
+
 
 button {
     /* https://1stwebdesigner.com/free-code-snippets-css-buttons/ */
@@ -342,6 +349,42 @@ button {
     margin: 10px;
 }
 
+.row.poppable{
+    border: 5px solid lime;
+}
+
+
+.scoreboard{
+    background-color: whitesmoke;
+    display: grid;
+    border: 2px solid black;
+    grid-gap: 15px;
+    padding: 10px;
+    height: 120px;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Indie Flower', cursive;
+    font-size: bold;
+    font-size: 2.3em;
+}
+
+.user-interface{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+}
+
+#red-score-num,#yellow-score-num{
+    position: relative;
+    left:25px;
+}
+
+.red-score{
+    color: red;
+}
+
+.yellow-score{
+    color: goldenrod;
+}
 .credits{
     /* Gazer Suthy in the building */
     position: absolute;
@@ -351,5 +394,30 @@ button {
     right: 0.5cm;
     font-family: 'Satisfy', cursive;
 }
+
+.pop-button{
+    position: absolute;
+    display: none;
+    z-index: 100;
+    top:230px;
+    right:75px;
+}
+
+.pop-button.appear{
+    display: block;
+}
+
+.cancel{
+    display: none;
+    z-index: 0;
+    position: absolute;
+    top:230px;
+    right: 75px;
+}
+
+.cancel.appear{
+    display: block;
+}
+
 
 
