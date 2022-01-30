@@ -1,7 +1,6 @@
 /* 
     Important lesson: Leave the animation's to css and leave the functionality of objects to javascript.
     I was trying to animate the win menu with javascript (removing and adding colours classes in setTimout's) which was a noob move!  
-    There are level's to this shit baby! Had to make that mistake in-order to learn from it :D
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
